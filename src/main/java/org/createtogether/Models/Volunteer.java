@@ -19,7 +19,9 @@ public class Volunteer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int vId;
 	
-	private String vName;
+	private String vFirstName;
+	
+	private String vLastName;
 	
 	private String vMobileNo;
 	
@@ -41,12 +43,20 @@ public class Volunteer {
 		this.vId = vId;
 	}
 
-	public String getvName() {
-		return vName;
+	public String getvFirstName() {
+		return vFirstName;
 	}
 
-	public void setvName(String vName) {
-		this.vName = vName;
+	public void setvFirstName(String vFirstName) {
+		this.vFirstName = vFirstName;
+	}
+
+	public String getvLastName() {
+		return vLastName;
+	}
+
+	public void setvLastName(String vLastName) {
+		this.vLastName = vLastName;
 	}
 
 	public String getvMobileNo() {
