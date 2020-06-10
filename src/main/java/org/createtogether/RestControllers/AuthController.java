@@ -3,12 +3,14 @@ package org.createtogether.RestControllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.createtogether.Models.ERole;
 import org.createtogether.Models.User;
 import org.createtogether.Repository.RoleRepository;
 import org.createtogether.Repository.UserRepository;
 import org.createtogether.Security.Services.UserDetailsImpl;
 import org.createtogether.Security.jwt.JwtResponse;
 import org.createtogether.Security.jwt.JwtUtils;
+import org.createtogether.Services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,6 +37,9 @@ public class AuthController {
 	RoleRepository roleRepository;
 	
 	@Autowired
+	AuthService authService;
+	
+	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
@@ -55,6 +60,12 @@ public class AuthController {
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+	}
+	
+	@PostMapping("/signup")
+	public ResponseEntity<?> registerUser(@RequestBody User user) {
+		
+		return authService.registerUser(user, ERole.ROLE_USER);
 	}
 	
 }
