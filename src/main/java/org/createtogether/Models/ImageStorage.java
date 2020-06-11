@@ -3,6 +3,7 @@ package org.createtogether.Models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,6 +20,9 @@ public class ImageStorage {
 	private String imgType;
 	
 	private byte[] imgFile;
+	
+	@ManyToOne
+	private Post post;
 	
 	public ImageStorage() {
 
@@ -61,6 +65,14 @@ public class ImageStorage {
 
 	public void setImgFile(byte[] imgFile) {
 		this.imgFile = imgFile;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 	
 }
