@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService{
 
 		// Create new user's account
 		User newUser = new User(user.getEmail(), 
-				user.getUsername(),
+				user.getFirstName(), user.getLastName(), user.getMobileno(),
 				bCryptPasswordEncoder.encode(user.getPassword()));
 
 		Set<Role> roles = new HashSet<>();

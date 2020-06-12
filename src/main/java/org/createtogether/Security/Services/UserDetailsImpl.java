@@ -27,10 +27,10 @@ public class UserDetailsImpl implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserDetailsImpl(int id, String username, String email, String password,
+	public UserDetailsImpl(int id, String firstName, String lastName, String email, String password,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
-		this.username = username;
+		this.username = firstName + " " + lastName;
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
@@ -43,7 +43,8 @@ public class UserDetailsImpl implements UserDetails {
 
 		return new UserDetailsImpl(
 				user.getId(), 
-				user.getUsername(), 
+				user.getFirstName(),
+				user.getLastName(),
 				user.getEmail(),
 				user.getPassword(), 
 				authorities);

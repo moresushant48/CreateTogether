@@ -34,9 +34,15 @@ public class User {
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "username")
-	private String username;
+	@Column(name = "fname")
+	private String firstName;
 	
+	@Column(name = "lname")
+	private String lastName;
+	
+	@Column(name = "mobile")
+	private String mobileno;
+		
 	@Column(name = "password")
 	private String password;
 	
@@ -53,10 +59,12 @@ public class User {
 	
 	}
 
-	public User(String email, String username, String password) {
+	public User(String email, String firstName, String lastName, String mobile, String password) {
 		super();
 		this.email = email;
-		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobileno = mobile;
 		this.password = password;
 	}
 
@@ -75,13 +83,29 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getUsername() {
-		return username;
+	
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public String getMobileno() {
+		return mobileno;
+	}
+
+	public void setMobileno(String mobileno) {
+		this.mobileno = mobileno;
 	}
 
 	public String getPassword() {
@@ -110,7 +134,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", username=" + username + ", password=" + password + ", roles="
-				+ roles + "]";
+		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", mobile=" + mobileno + ", password=" + password + ", roles=" + roles + ", posts=" + posts + "]";
 	}
 }
