@@ -1,14 +1,23 @@
 package org.createtogether.Models;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Post {
@@ -21,20 +30,26 @@ public class Post {
 	
 	private String postMetaTitle;
 	
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String postSummary;
 	
 	private Boolean postPublished;
 	
-	private String postCreatedDate;
+	@CreationTimestamp
+	private LocalDateTime postCreatedDate;
 	
-	private String postUpdatedDate;
+	@UpdateTimestamp
+	private LocalDateTime postUpdatedDate;
 	
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	private String postContent;
 	
 	@ManyToOne
 	private User postUser;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Category category;
 	
 	@OneToMany(mappedBy = "post")
@@ -45,14 +60,12 @@ public class Post {
 	}
 
 	public Post(String postTitle, String postMetaTitle, String postSummary, Boolean postPublished,
-			String postCreatedDate, String postUpdatedDate, String postContent, User postUser) {
+			String postContent, User postUser) {
 		super();
 		this.postTitle = postTitle;
 		this.postMetaTitle = postMetaTitle;
 		this.postSummary = postSummary;
 		this.postPublished = postPublished;
-		this.postCreatedDate = postCreatedDate;
-		this.postUpdatedDate = postUpdatedDate;
 		this.postContent = postContent;
 		this.postUser = postUser;
 	}
@@ -97,19 +110,19 @@ public class Post {
 		this.postPublished = postPublished;
 	}
 
-	public String getPostCreatedDate() {
+	public LocalDateTime getPostCreatedDate() {
 		return postCreatedDate;
 	}
 
-	public void setPostCreatedDate(String postCreatedDate) {
+	public void setPostCreatedDate(LocalDateTime postCreatedDate) {
 		this.postCreatedDate = postCreatedDate;
 	}
 
-	public String getPostUpdatedDate() {
+	public LocalDateTime getPostUpdatedDate() {
 		return postUpdatedDate;
 	}
 
-	public void setPostUpdatedDate(String postUpdatedDate) {
+	public void setPostUpdatedDate(LocalDateTime postUpdatedDate) {
 		this.postUpdatedDate = postUpdatedDate;
 	}
 
@@ -121,6 +134,7 @@ public class Post {
 		this.postContent = postContent;
 	}
 
+	@JsonBackReference
 	public User getPostUser() {
 		return postUser;
 	}
@@ -143,6 +157,14 @@ public class Post {
 
 	public void setImages(Set<ImageStorage> images) {
 		this.images = images;
+	}
+
+	@Override
+	public String toString() {
+		return "Post [postId=" + postId + ", postTitle=" + postTitle + ", postMetaTitle=" + postMetaTitle
+				+ ", postSummary=" + postSummary + ", postPublished=" + postPublished + ", postCreatedDate="
+				+ postCreatedDate + ", postUpdatedDate=" + postUpdatedDate + ", postContent=" + postContent
+				+ ", postUser=" + postUser + ", category=" + category + ", images=" + images + "]";
 	}
 	
 }

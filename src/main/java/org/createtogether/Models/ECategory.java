@@ -2,5 +2,6 @@ package org.createtogether.Models;
 
 public enum ECategory {
 	PROGRAMS,
-	EVENTS
+	EVENTS,
+	UNSPECIFIED
 }

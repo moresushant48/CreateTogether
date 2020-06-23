@@ -16,6 +16,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 /*
  * Model Class for User
  */
@@ -43,6 +48,7 @@ public class User {
 	@Column(name = "mobile")
 	private String mobileno;
 		
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "password")
 	private String password;
 	
@@ -66,6 +72,10 @@ public class User {
 		this.lastName = lastName;
 		this.mobileno = mobile;
 		this.password = password;
+	}
+
+	public User(int id) {
+		this.id = id;
 	}
 
 	public int getId() {
@@ -108,6 +118,7 @@ public class User {
 		this.mobileno = mobileno;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -124,6 +135,7 @@ public class User {
 		this.roles = roles;
 	}
 	
+	@JsonManagedReference
 	public Set<Post> getPosts() {
 		return posts;
 	}
