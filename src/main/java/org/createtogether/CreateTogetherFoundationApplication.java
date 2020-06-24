@@ -19,7 +19,7 @@ public class CreateTogetherFoundationApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				// TODO Auto-generated method stub
-				registry.addMapping("/api/**");
+				registry.addMapping("/api/**").allowedMethods("*");
 			}
 		};
 	}
